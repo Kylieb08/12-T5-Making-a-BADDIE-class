@@ -1,14 +1,29 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 
 namespace _12_T5_Making_a_BADDIE_class
 {
+    public enum Screen
+    {
+        Title,
+        House,
+        End
+    }
+
     public class Game1 : Game
     {
+        Random generator;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        Rectangle window;
+        Rectangle window, playerRect;
+        Screen screen;
+        Ghost ghost1;
+        List<Texture2D> ghostTextures;
+        Texture2D backgroudTexture, playerTexture;
+        MouseState mouseState;
 
         public Game1()
         {
@@ -25,6 +40,8 @@ namespace _12_T5_Making_a_BADDIE_class
             _graphics.PreferredBackBufferHeight = window.Height;
             _graphics.ApplyChanges();
 
+            ghostTextures = new List<Texture2D>();
+
             base.Initialize();
         }
 
@@ -33,6 +50,13 @@ namespace _12_T5_Making_a_BADDIE_class
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            playerTexture = Content.Load<Texture2D>("Images/mario");
+            backgroudTexture = Content.Load<Texture2D>("Images/haunted-background");
+            ghostTextures.Add(Content.Load<Texture2D>("Images/boo-stopped"));
+            for (int i = 1; i <= 8;  i++)
+            {
+                ghostTextures.Add(Content.Load<Texture2D>($"Images/boo-move-{i}"));
+            }
         }
 
         protected override void Update(GameTime gameTime)
