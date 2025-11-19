@@ -67,6 +67,9 @@ namespace _12_T5_Making_a_BADDIE_class
                 Exit();
 
             // TODO: Add your update logic here
+            mouseState = Mouse.GetState();
+
+            ghost1.Update(mouseState);
 
             base.Update(gameTime);
         }
