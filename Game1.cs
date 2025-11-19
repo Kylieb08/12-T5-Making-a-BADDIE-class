@@ -43,6 +43,8 @@ namespace _12_T5_Making_a_BADDIE_class
             ghostTextures = new List<Texture2D>();
 
             base.Initialize();
+
+            ghost1 = new Ghost(ghostTextures, new Rectangle(150, 250, 40, 40));
         }
 
         protected override void LoadContent()
@@ -74,6 +76,12 @@ namespace _12_T5_Making_a_BADDIE_class
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+
+            _spriteBatch.Draw(backgroudTexture, window, Color.White);
+            ghost1.Draw(_spriteBatch);
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
