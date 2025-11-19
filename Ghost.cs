@@ -39,7 +39,7 @@ namespace _12_T5_Making_a_BADDIE_class
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_textures[_textureIndex], _location, null, Color.White, 0f,
-                Vector2.Zero, _direction, 1);
+                Vector2.Zero, _direction, 1f);
         }
     }
 }
