@@ -17,7 +17,7 @@ namespace _12_T5_Making_a_BADDIE_class
         private Rectangle _location;
         private int _textureIndex;
         private SpriteEffects _direction;
-        private float _animationSpeed, _seconds;
+        private float _animationSpeed, _seconds, _opacity;
 
         public Ghost(List<Texture2D> textures, Rectangle location)
         {
@@ -28,6 +28,7 @@ namespace _12_T5_Making_a_BADDIE_class
             _direction = SpriteEffects.None;
             _animationSpeed = 0.2f;
             _seconds = 0;
+            _opacity = 1f;
         }
 
         public void Update(GameTime gametime, MouseState mouseState)
@@ -60,10 +61,12 @@ namespace _12_T5_Making_a_BADDIE_class
                 _speed = Vector2.Zero;
                 _textureIndex = 0;
                 _seconds = 0f;
+                _opacity = 0.3f;
             }
 
             else if (_speed != Vector2.Zero)
             {
+                _opacity = 1f;
                 _seconds += (float)gametime.ElapsedGameTime.TotalSeconds;
                 if (_seconds > _animationSpeed)
                 {
@@ -95,8 +98,8 @@ namespace _12_T5_Making_a_BADDIE_class
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_textures[_textureIndex], _location, null, Color.White, 0f,
-                Vector2.Zero, _direction, 1f);
+            spriteBatch.Draw(_textures[_textureIndex], _location, null, Color.White * _opacity,
+                0f, Vector2.Zero, _direction, 1f);
         }
     }
 }
