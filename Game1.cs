@@ -22,8 +22,9 @@ namespace _12_T5_Making_a_BADDIE_class
         Screen screen;
         Ghost ghost1;
         List<Texture2D> ghostTextures;
-        Texture2D backgroudTexture, playerTexture;
+        Texture2D backgroudTexture, playerTexture, titleTexture, endTexture;
         MouseState mouseState;
+        KeyboardState keyboardState;
 
         public Game1()
         {
@@ -35,6 +36,7 @@ namespace _12_T5_Making_a_BADDIE_class
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            screen = Screen.Title;
             window = new Rectangle(0, 0, 800, 500);
             _graphics.PreferredBackBufferWidth = window.Width;
             _graphics.PreferredBackBufferHeight = window.Height;
@@ -54,6 +56,8 @@ namespace _12_T5_Making_a_BADDIE_class
             // TODO: use this.Content to load your game content here
             playerTexture = Content.Load<Texture2D>("Images/mario");
             backgroudTexture = Content.Load<Texture2D>("Images/haunted-background");
+            titleTexture = Content.Load<Texture2D>("Images/haunted-title");
+            endTexture = Content.Load<Texture2D>("Images/haunted-end-screen");
             ghostTextures.Add(Content.Load<Texture2D>("Images/boo-stopped"));
             for (int i = 1; i <= 8;  i++)
             {
@@ -68,8 +72,22 @@ namespace _12_T5_Making_a_BADDIE_class
 
             // TODO: Add your update logic here
             mouseState = Mouse.GetState();
+            keyboardState = Keyboard.GetState();
 
-            ghost1.Update(gameTime, mouseState);
+            if (screen == Screen.Title)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter))
+                    screen = Screen.House;
+            }
+
+            else if (screen == Screen.House)
+            {
+                ghost1.Update(gameTime, mouseState);
+                if (ghost1.Contains(mouseState.Position))
+                    screen = Screen.End;
+            }
+
+                
 
             base.Update(gameTime);
         }
@@ -81,10 +99,19 @@ namespace _12_T5_Making_a_BADDIE_class
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(backgroudTexture, window, Color.White);
-            ghost1.Draw(_spriteBatch);
+            if (screen == Screen.Title)
+                _spriteBatch.Draw(titleTexture, window, Color.White);
 
-            _spriteBatch.End();
+            else if (screen == Screen.House)
+            {
+                _spriteBatch.Draw(backgroudTexture, window, Color.White);
+                ghost1.Draw(_spriteBatch);
+            }
+
+            else
+                _spriteBatch.Draw(endTexture, window, Color.White);
+
+                _spriteBatch.End();
 
             base.Draw(gameTime);
         }

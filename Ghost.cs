@@ -78,6 +78,21 @@ namespace _12_T5_Making_a_BADDIE_class
                 _location.Offset(_speed);
         }
 
+        public Rectangle Rect
+        {
+            get { return _location; }
+        }
+
+        public bool Contains(Point player)
+        {
+            return _location.Contains(player);
+        }
+
+        public bool Intersects(Rectangle player)
+        {
+            return _location.Intersects(player);
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_textures[_textureIndex], _location, null, Color.White, 0f,
