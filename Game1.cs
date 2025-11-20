@@ -25,6 +25,7 @@ namespace _12_T5_Making_a_BADDIE_class
         Texture2D backgroudTexture, marioTexture, titleTexture, endTexture;
         MouseState mouseState;
         KeyboardState keyboardState;
+        List<Ghost> ghosts;
 
         public Game1()
         {
@@ -42,14 +43,21 @@ namespace _12_T5_Making_a_BADDIE_class
             _graphics.PreferredBackBufferHeight = window.Height;
             _graphics.ApplyChanges();
 
+            generator = new Random();
+
             ghostTextures = new List<Texture2D>();
+            ghosts = new List<Ghost>();
 
             marioRect = new Rectangle(0, 0, 30, 30);
 
             base.Initialize();
 
             this.IsMouseVisible = false;
-            ghost1 = new Ghost(ghostTextures, new Rectangle(150, 250, 40, 40));
+            for (int i = 0; i < 20; i++)
+            {
+                ghosts.Add(new Ghost(ghostTextures, new Rectangle
+                    (generator.Next(500), generator.Next(500),40, 40)));
+            }
         }
 
         protected override void LoadContent()
@@ -86,9 +94,13 @@ namespace _12_T5_Making_a_BADDIE_class
 
             else if (screen == Screen.House)
             {
-                ghost1.Update(gameTime, mouseState);
-                if (ghost1.Contains(mouseState.Position))
-                    screen = Screen.End;
+                foreach (Ghost ghost in ghosts)
+                {
+                    ghost.Update(gameTime, mouseState);
+                    if (ghost.Contains(mouseState.Position))
+                        screen = Screen.End;
+                }
+                
             }
 
                 
@@ -109,7 +121,8 @@ namespace _12_T5_Making_a_BADDIE_class
             else if (screen == Screen.House)
             {
                 _spriteBatch.Draw(backgroudTexture, window, Color.White);
-                ghost1.Draw(_spriteBatch);
+                foreach (Ghost ghost in ghosts)
+                    ghost.Draw(_spriteBatch);
             }
 
             else
