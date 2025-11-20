@@ -18,11 +18,11 @@ namespace _12_T5_Making_a_BADDIE_class
         Random generator;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        Rectangle window, playerRect;
+        Rectangle window, marioRect;
         Screen screen;
         Ghost ghost1;
         List<Texture2D> ghostTextures;
-        Texture2D backgroudTexture, playerTexture, titleTexture, endTexture;
+        Texture2D backgroudTexture, marioTexture, titleTexture, endTexture;
         MouseState mouseState;
         KeyboardState keyboardState;
 
@@ -44,8 +44,11 @@ namespace _12_T5_Making_a_BADDIE_class
 
             ghostTextures = new List<Texture2D>();
 
+            marioRect = new Rectangle(0, 0, 30, 30);
+
             base.Initialize();
 
+            this.IsMouseVisible = false;
             ghost1 = new Ghost(ghostTextures, new Rectangle(150, 250, 40, 40));
         }
 
@@ -54,7 +57,7 @@ namespace _12_T5_Making_a_BADDIE_class
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            playerTexture = Content.Load<Texture2D>("Images/mario");
+            marioTexture = Content.Load<Texture2D>("Images/mario");
             backgroudTexture = Content.Load<Texture2D>("Images/haunted-background");
             titleTexture = Content.Load<Texture2D>("Images/haunted-title");
             endTexture = Content.Load<Texture2D>("Images/haunted-end-screen");
@@ -73,6 +76,7 @@ namespace _12_T5_Making_a_BADDIE_class
             // TODO: Add your update logic here
             mouseState = Mouse.GetState();
             keyboardState = Keyboard.GetState();
+            marioRect.Location = mouseState.Position;
 
             if (screen == Screen.Title)
             {
@@ -110,6 +114,8 @@ namespace _12_T5_Making_a_BADDIE_class
 
             else
                 _spriteBatch.Draw(endTexture, window, Color.White);
+
+            _spriteBatch.Draw(marioTexture, marioRect, Color.White);
 
                 _spriteBatch.End();
 
