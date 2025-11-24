@@ -41,7 +41,6 @@ namespace _12_T5_Making_a_BADDIE_class
                 if (_location.X < 0)
                     _location.X = 0;
             }
-                
 
             else if (mouseState.X > _location.X)
             {
@@ -57,9 +56,6 @@ namespace _12_T5_Making_a_BADDIE_class
                 if (_location.Y < 0)
                     _location.Y = 0;
             }
-                
-            
-
 
             else if (mouseState.Y > _location.Y)
             {
@@ -67,8 +63,6 @@ namespace _12_T5_Making_a_BADDIE_class
                 if (_location.Y > 460)
                     _location.Y = 460;
             }
-               
-            
 
             if (mouseState.LeftButton == ButtonState.Released)
             {
@@ -90,7 +84,6 @@ namespace _12_T5_Making_a_BADDIE_class
                         _textureIndex = 1;
                 }
             }
-
 
                 _location.Offset(_speed);
         }
