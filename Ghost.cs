@@ -38,6 +38,8 @@ namespace _12_T5_Making_a_BADDIE_class
             {
                 _direction = SpriteEffects.FlipHorizontally;
                 _speed.X = -1;
+                if (_location.X < 0)
+                    _location.X = 0;
             }
                 
 
@@ -45,15 +47,27 @@ namespace _12_T5_Making_a_BADDIE_class
             {
                 _direction = SpriteEffects.None;
                 _speed.X = 1;
+                if (_location.X > 760)
+                    _location.X = 760;
             }
 
             if (mouseState.Y < _location.Y)
+            {
                 _speed.Y = -1;
+                if (_location.Y < 0)
+                    _location.Y = 0;
+            }
+                
             
 
 
             else if (mouseState.Y > _location.Y)
+            {
                 _speed.Y = 1;
+                if (_location.Y > 460)
+                    _location.Y = 460;
+            }
+               
             
 
             if (mouseState.LeftButton == ButtonState.Released)
