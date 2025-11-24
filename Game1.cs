@@ -97,7 +97,7 @@ namespace _12_T5_Making_a_BADDIE_class
                 foreach (Ghost ghost in ghosts)
                 {
                     ghost.Update(gameTime, mouseState);
-                    if (ghost.Contains(mouseState.Position))
+                    if (ghost.Contains(mouseState.Position) && mouseState.LeftButton == ButtonState.Pressed)
                         screen = Screen.End;
                 }
                 
