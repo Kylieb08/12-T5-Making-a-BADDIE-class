@@ -22,7 +22,7 @@ namespace _12_T5_Making_a_BADDIE_class
         Screen screen;
         Ghost ghost1;
         List<Texture2D> ghostTextures;
-        Texture2D backgroudTexture, marioTexture, titleTexture, endTexture;
+        Texture2D backgroundTexture, marioTexture, titleTexture, endTexture;
         MouseState mouseState;
         KeyboardState keyboardState;
         List<Ghost> ghosts;
@@ -66,7 +66,7 @@ namespace _12_T5_Making_a_BADDIE_class
 
             // TODO: use this.Content to load your game content here
             marioTexture = Content.Load<Texture2D>("Images/mario");
-            backgroudTexture = Content.Load<Texture2D>("Images/haunted-background");
+            backgroundTexture = Content.Load<Texture2D>("Images/haunted-background");
             titleTexture = Content.Load<Texture2D>("Images/haunted-title");
             endTexture = Content.Load<Texture2D>("Images/haunted-end-screen");
             ghostTextures.Add(Content.Load<Texture2D>("Images/boo-stopped"));
@@ -120,7 +120,7 @@ namespace _12_T5_Making_a_BADDIE_class
 
             else if (screen == Screen.House)
             {
-                _spriteBatch.Draw(backgroudTexture, window, Color.White);
+                _spriteBatch.Draw(backgroundTexture, window, Color.White);
                 foreach (Ghost ghost in ghosts)
                     ghost.Draw(_spriteBatch);
             }
